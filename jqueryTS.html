@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html>
+<meta charset="utf-8">
+
+<head>
+  <style>
+      .btns {
+        margin-left: 25px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+
+      }
+
+      .showOf106F,
+      .showOf107F,
+      .showOf106Sec,
+      .showOf107Sec {
+        display: none;
+      }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script>
+    //not to define in ready(function())for pretending the NOT DEFINED problem
+    var Arr106F = [0, 0, 0];
+    var Arr106Sec = [0, 0, 0];
+    var Arr107F = [0, 0, 0];
+    var Arr107Sec = [0, 0, 0];
+
+    $(document).ready(function() {
+
+      $("#106First").click(function() {
+        $(".showOf106F").slideToggle("slow"); //show all the thing inside class showOf106F
+      });
+
+
+      $("#106Sec").click(function() {
+        $(".showOf106Sec").slideToggle("slow"); //of showOf106Sec
+      });
+
+      $("#107First").click(function() {
+        $(".showOf107F").slideToggle("slow"); //of showOf107F
+      });
+
+      $("#107Sec").click(function() {
+        $(".showOf107Sec").slideToggle("slow"); //of showOf107Sec
+      });
+    });
+
+    //Still Weird that function wrote in ready(function()) doesnt work but work outside...
+
+    function fEnter1() {
+      // operator '+' for making the value into FUCKING INTEGER
+      Arr106F[0] = +document.getElementById("JavaA1").value;
+      Arr106F[1] = +document.getElementById("PythonA2").value;
+      Arr106F[2] = +document.getElementById("WebA3").value;
+    }
+
+    function fEnter2() {
+      Arr106Sec[0] = +document.getElementById("JavaB1").value;
+      Arr106Sec[1] = +document.getElementById("PythonB2").value;
+      Arr106Sec[2] = +document.getElementById("WebB3").value;
+    }
+
+    function fEnter3() {
+      Arr107F[0] = +document.getElementById("JavaC1").value;
+      Arr107F[1] = +document.getElementById("PythonC2").value;
+      Arr107F[2] = +document.getElementById("WebC3").value;
+    }
+
+    function fEnter4() {
+      Arr107Sec[0] = +document.getElementById("JavaD1").value;
+      Arr107Sec[1] = +document.getElementById("PythonD2").value;
+      Arr107Sec[2] = +document.getElementById("WebD3").value;
+    }
+
+    function fAverageAll() {
+      //remember to define a number for pretending not defined problem
+      var sum = 0;
+      for (var i = 0; i < 3; i++) {
+        sum += Arr106F[i];
+        sum += Arr106Sec[i];
+        sum += Arr107F[i];
+        sum += Arr107Sec[i];
+      }
+      sum /= 12;
+      document.getElementById("showAverageAll").innerHTML = sum;
+    }
+
+    function fAverageEach() {
+      var for106F = 0,
+        for106Sec = 0,
+        for107F = 0,
+        for107Sec = 0;
+      for106F = Arr106F.reduce(getSum);
+      for106Sec = Arr106Sec.reduce(getSum);
+      for107F = Arr107F.reduce(getSum);
+      for107Sec = Arr107Sec.reduce(getSum);
+
+      document.getElementById("showAverageAll").innerHTML =
+        "106 First semester: " + for106F / 3 +
+        " <br> 106 Second semester: " + for106Sec / 3 +
+        " <br> 107 First semester: " + for107F / 3 +
+        " <br> 107 Second semester: " + for107Sec / 3;
+    }
+
+    function getSum(total, next) {
+      //配合reduce()來縮短程式adding
+      return total + next;
+    }
+
+    //TODO next to do
+
+    function highest() {
+      var newArr = Arr106F.concat(Arr106Sec, Arr107F, Arr107Sec);
+      newArr.sort(function(a, b) {
+        return b - a
+      });
+      document.getElementById("showAverageAll").innerHTML = newArr[0];
+    }
+
+    function lowest() {
+      var newArr = Arr106F.concat(Arr106Sec, Arr107F, Arr107Sec);
+      newArr.sort(function(a, b) {
+        return a - b
+      });
+      document.getElementById("showAverageAll").innerHTML = newArr[0];
+    }
+  </script>
+</head>
+
+<body>
+  <div>
+
+    <!-- Weird to say that why the button will cause reloading page...
+          however adding type='button' fixed it...   -->
+    <button id="106First" class="btns"> The First Semester of 106 </button>
+    <form class="showOf106F">
+      Java Score : <input type="text" id="JavaA1"> <br>
+      Web Score : <input type="text" id="WebA3"> <br>
+      Python Score : <input type="text" id="PythonA2"> <br>
+
+      <button type='button' id="enter1" onclick="fEnter1()"> Enter </button>
+    </form>
+  </div>
+
+  <div>
+    <button id="106Sec" class="btns"> The Second Semester of 106 </button>
+    <form class="showOf106Sec">
+      Java Score : <input type="text" id="JavaB1"> <br>
+      Web Score : <input type="text" id="WebB3"> <br>
+      Python Score : <input type="text" id="PythonB2"> <br>
+
+      <button type='button' id="enter2" onclick="fEnter2()"> Enter </button>
+    </form>
+  </div>
+
+  <div>
+    <button id="107First" class="btns"> The First Semester of 107 </button>
+    <form class="showOf107F">
+      Java Score : <input type="text" id="JavaC1"> <br>
+      Web Score : <input type="text" id="WebC3"> <br>
+      Python Score : <input type="text" id="PythonC2"> <br>
+
+      <button type='button' id="enter3" onclick="fEnter3()"> Enter </button>
+    </form>
+  </div>
+
+  <div>
+    <button id="107Sec" class="btns"> The Second Semester of 107 </button>
+    <form class="showOf107Sec">
+      Java Score : <input type="text" id="JavaD1"> <br>
+      Web Score : <input type="text" id="WebD3"> <br>
+      Python Score : <input type="text" id="PythonD2"> <br>
+
+      <button type='button' id="enter4" onclick="fEnter4()"> Enter </button>
+    </form>
+  </div>
+
+  <div>
+    <button type='button' id="averageAll" onclick="fAverageAll()"> 總平均 </button>
+    <button type='button' id="averageEach" onclick="fAverageEach()"> 學期平均 </button>
+    <button type='button' id="best" onclick="highest()"> 最高成績 </button>
+    <button type='button' id="worst" onclick="lowest()"> 最低成績 </button>
+  </div>
+
+  <div>
+    <p id="showAverageAll">"test"</p>
+  </div>
+</body>
+
+
+
+</html>
